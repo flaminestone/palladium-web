@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from '../services/authentication.service';
 import { ProgressMainService } from '../services/progress-main.service';
 
 @Component({
@@ -10,6 +11,7 @@ export class ToolbarComponent {
 
 
 
-  constructor(public progress: ProgressMainService) {}
+  constructor(public progress: ProgressMainService,
+     public authenticationService: AuthenticationService) {}
 
 }

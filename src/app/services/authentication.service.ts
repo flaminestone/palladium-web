@@ -11,6 +11,8 @@ export class AuthenticationService {
   public authorisedStatus = new BehaviorSubject<boolean>(false);
 
   private token: string | undefined;
+  readonly username: string | undefined;
+  
   constructor(private router: Router,
     private http: HttpClient) {
     this.authorisedStatus.next(this.getAuthorisedStatus());
@@ -18,6 +20,7 @@ export class AuthenticationService {
 
   getAuthorisedStatus(): boolean {
     // if "auth_data" is placed in local storage - it is authorized person
+    console.log('asdasdasd')
     return !!localStorage.getItem('auth_data');
   }
 
@@ -27,7 +30,7 @@ export class AuthenticationService {
     return this.http.post<TokenRequestInterface>('/public/login', requestData).pipe(map((response) => {
       localStorage.setItem('auth_data', JSON.stringify({ username, token: response?.token }));
       this.router.navigate(['/']);
-
+      this.authorisedStatus.next(this.getAuthorisedStatus());
       return response;
     }));
   }
@@ -36,7 +39,8 @@ export class AuthenticationService {
   logout(): void {
     // clear token remove user from local storage to log user out
     localStorage.removeItem('auth_data');
-    this.router.navigate(['/']);
+    this.authorisedStatus.next(this.getAuthorisedStatus());
+    this.router.navigate(['/login']);
   }
 }
 
