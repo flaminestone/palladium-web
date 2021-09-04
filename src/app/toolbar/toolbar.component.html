@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <a mat-button aria-label="Navigate to the palladium homepage."
+     routerLink="/" routerLinkActive="active">Palladium</a>
+    <span class="spacer"></span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div [ngClass]="{'place-for-progress-bar': (progress.state.visible$ | async) === false}">
+  <mat-progress-bar *ngIf="progress.state.visible$ | async"
+  [color]="progress.state.color$ | async"
+  [mode]="(progress.state.mode$ | async)!"
+  [value]="progress.state.value$ | async"
+  [bufferValue]="(progress.state.value$ | async)!">
+</mat-progress-bar>
+</div>
+

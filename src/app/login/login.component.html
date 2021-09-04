@@ -1,0 +1,38 @@
+<div class="form-wrapper">
+  <mat-card>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" id="loginForm" focusInvalidInput>
+        <h2>Sing in to Palladium</h2>
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            placeholder="Email"
+            formControlName="username"
+            required
+          />
+          <mat-error *ngIf="form.controls.username.errors?.email">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="form.controls.username.errors?.required">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+            required
+          />
+          <mat-error *ngIf="form.controls.password.errors?.required">
+            Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" form="loginForm" type="submit">Sing in</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
