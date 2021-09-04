@@ -5,7 +5,7 @@
     <span class="spacer"></span>
     <button mat-button [matMenuTriggerFor]="menu" *ngIf="authenticationService.authorisedStatus | async">
       <mat-icon>person</mat-icon>
-      Username
+      {{currentUserService.getUser()?.username}}
     </button>
   </mat-toolbar-row>
 </mat-toolbar>
