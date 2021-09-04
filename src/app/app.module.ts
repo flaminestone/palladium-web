@@ -28,6 +28,7 @@ import { httpInterceptorManager } from './interceptors/http-interceptor-manager'
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FocusInvalidInputDirective } from './directives/focus-invalid-input.directive';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { FocusInvalidInputDirective } from './directives/focus-invalid-input.dir
     RootComponent,
     ToolbarComponent,
     FocusInvalidInputDirective,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
