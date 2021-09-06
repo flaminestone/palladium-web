@@ -12,14 +12,12 @@
     </button>
   </mat-toolbar-row>
 </mat-toolbar>
-<div [ngClass]="{'place-for-progress-bar': (progress.state.visible$ | async) === false}">
-  <mat-progress-bar *ngIf="progress.state.visible$ | async"
+<mat-progress-bar *ngIf="progress.state.visible$ | async"
   [color]="progress.state.color$ | async"
   [mode]="(progress.state.mode$ | async)!"
   [value]="progress.state.value$ | async"
   [bufferValue]="(progress.state.value$ | async)!">
 </mat-progress-bar>
-</div>
 
 <mat-menu #menu="matMenu">
   <button mat-menu-item (click)="authenticationService.logout()">Logout</button>

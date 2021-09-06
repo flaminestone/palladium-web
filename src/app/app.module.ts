@@ -30,6 +30,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FocusInvalidInputDirective } from './directives/focus-invalid-input.directive';
 import { HeaderComponent } from './header/header.component';
 import { ThemeService } from './services/theme.service';
+import { ProjectComponent } from './project/project.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ThemeService } from './services/theme.service';
     ToolbarComponent,
     FocusInvalidInputDirective,
     HeaderComponent,
+    ProjectComponent,
   ],
   imports: [
     BrowserModule,
