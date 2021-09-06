@@ -22,7 +22,6 @@ export class AuthenticationService {
 
   getAuthorisedStatus(): boolean {
     // if "auth_data" is placed in local storage - it is authorized person
-    console.log('asdasdasd')
     return !!localStorage.getItem('auth_data');
   }
 

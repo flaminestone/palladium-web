@@ -29,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FocusInvalidInputDirective } from './directives/focus-invalid-input.directive';
 import { HeaderComponent } from './header/header.component';
+import { ThemeService } from './services/theme.service';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,7 @@ import { HeaderComponent } from './header/header.component';
     HttpClientModule,
     MatSnackBarModule
   ],
-  providers: [httpInterceptorManager],
+  providers: [httpInterceptorManager, ThemeService],
   bootstrap: [RootComponent]
 })
 export class AppModule { }

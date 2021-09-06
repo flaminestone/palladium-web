@@ -3,6 +3,9 @@
     <a mat-button aria-label="Navigate to the palladium homepage."
      routerLink="/" routerLinkActive="active">Palladium</a>
     <span class="spacer"></span>
+    <button mat-icon-button (click)="themeService.setDarkTheme(!themeService.isDarkTheme.value)">
+      <mat-icon>{{(themeService.isDarkTheme | async)?"dark_mode":"light_mode"}}</mat-icon>
+    </button>
     <button mat-button [matMenuTriggerFor]="menu" *ngIf="authenticationService.authorisedStatus | async">
       <mat-icon>person</mat-icon>
       {{currentUserService.getUser()?.username}}

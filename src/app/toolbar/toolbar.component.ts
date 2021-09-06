@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { CurrentUserService } from '../services/current-user.service';
 import { ProgressMainService } from '../services/progress-main.service';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -10,10 +11,9 @@ import { ProgressMainService } from '../services/progress-main.service';
 })
 export class ToolbarComponent {
 
-
-
   constructor(public progress: ProgressMainService,
      public authenticationService: AuthenticationService,
+     public themeService: ThemeService,
      public currentUserService: CurrentUserService
      ) {}
 
