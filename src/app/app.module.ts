@@ -77,7 +77,7 @@ import { PalladiumApiService } from './services/palladium-api.service';
     HttpClientModule,
     MatSnackBarModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    StoreModule.forRoot({palladium: projectReducer}, {}),
+    StoreModule.forRoot({projects: projectReducer}, {}),
     EffectsModule.forRoot([PalladiumEffects]),
   ],
   providers: [httpInterceptorManager, ThemeService, PalladiumApiService],
