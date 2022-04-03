@@ -31,6 +31,13 @@ import { FocusInvalidInputDirective } from './directives/focus-invalid-input.dir
 import { HeaderComponent } from './header/header.component';
 import { ThemeService } from './services/theme.service';
 import { ProjectComponent } from './project/project.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { EntityDataModule } from '@ngrx/data';
+import { projectReduser } from './store/palladium.reducer';
+import { PalladiumEffects } from './store/palladium.effects';
+import { PalladiumApiService } from './services/palladium-api.service';
 
 @NgModule({
   declarations: [
@@ -69,9 +76,12 @@ import { ProjectComponent } from './project/project.component';
     MatInputModule,
     MatProgressBarModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreModule.forRoot({palladium: projectReduser}, {}),
+    EffectsModule.forRoot([PalladiumEffects]),
   ],
-  providers: [httpInterceptorManager, ThemeService],
+  providers: [httpInterceptorManager, ThemeService, PalladiumApiService],
   bootstrap: [RootComponent]
 })
 export class AppModule { }

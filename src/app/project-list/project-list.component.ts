@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from '../models/project.model';
+import { Store } from '@ngrx/store';
+import { ProjectActions } from '../store/palladium.actions';
+import { ProjectSelectors } from '../store/palladium.selectors';
 
 @Component({
   selector: 'project-list',
@@ -7,10 +9,13 @@ import { Project } from '../models/project.model';
   styleUrls: ['./project-list.component.scss']
 })
 export class ProjectListComponent implements OnInit {
-  public projects: Project[] = [];
-  constructor() { }
+  public projects$;
+  
+  constructor(private store$: Store) {
+    this.projects$ = this.store$.select(ProjectSelectors.get_projects)
+  }
 
   ngOnInit(): void {
-    this.projects = [new Project('Title')]
+    this.store$.dispatch(ProjectActions.getProjects())
   }
 }

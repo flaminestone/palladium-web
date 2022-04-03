@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
       this.allowLogin = false;
       this.authService.login(this.form.controls.username.value,
                              this.form.controls.password.value).
-                             pipe(finalize(() => this.allowLogin = true)).subscribe();
+                             pipe(finalize(() => this.allowLogin = true)).subscribe();                    
     }
   }
 }
