@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ProjectActions } from '../store/palladium.actions';
-import { ProjectSelectors } from '../store/palladium.selectors';
+import { ProjectActions } from '../../store/palladium.actions';
+import { ProjectSelectors } from '../../store/palladium.selectors';
 
 @Component({
   selector: 'project-list',
