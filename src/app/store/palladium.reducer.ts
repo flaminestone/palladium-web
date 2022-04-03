@@ -13,15 +13,10 @@ const initialPalladiumState: State = {
 }
 
 
-export const projectReduser = createReducer(
+export const projectReducer = createReducer(
     initialPalladiumState,
     on(ProjectActions.getProjectsSuccess, (state, {data}) => ({
         ...state,
         projects: data.map(projectData => new Project(projectData))
-
     }))
 );
-
-export function reducer(state: State | undefined, action: Action) {
-    return projectReduser(state, action)
-}

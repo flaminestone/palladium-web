@@ -34,8 +34,7 @@ import { ProjectComponent } from './project/project.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { EntityDataModule } from '@ngrx/data';
-import { projectReduser } from './store/palladium.reducer';
+import { projectReducer } from './store/palladium.reducer';
 import { PalladiumEffects } from './store/palladium.effects';
 import { PalladiumApiService } from './services/palladium-api.service';
 
@@ -78,7 +77,7 @@ import { PalladiumApiService } from './services/palladium-api.service';
     HttpClientModule,
     MatSnackBarModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    StoreModule.forRoot({palladium: projectReduser}, {}),
+    StoreModule.forRoot({palladium: projectReducer}, {}),
     EffectsModule.forRoot([PalladiumEffects]),
   ],
   providers: [httpInterceptorManager, ThemeService, PalladiumApiService],
