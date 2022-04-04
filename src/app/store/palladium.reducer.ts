@@ -18,5 +18,10 @@ export const projectReducer = createReducer(
     on(ProjectActions.getProjectsSuccess, (state, {data}) => ({
         ...state,
         projects: data.map(projectData => new Project(projectData))
+    })),
+
+    on(ProjectActions.newProjectSuccess, (state, projectData) => ({
+        ...state,
+        projects: [...state.projects, new Project(projectData)]
     }))
 );

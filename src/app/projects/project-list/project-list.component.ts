@@ -12,7 +12,7 @@ export class ProjectListComponent implements OnInit {
   public projects$;
   
   constructor(private store$: Store) {
-    this.projects$ = this.store$.select(ProjectSelectors.get_projects)
+    this.projects$ = this.store$.select(ProjectSelectors.getProjects)
   }
 
   ngOnInit(): void {

@@ -10,6 +10,7 @@ import { DashboardComponent } from './projects/project-main/project-main.compone
 import { ProjectListComponent } from './projects/project-list/project-list.component';
 import { RootComponent } from './root/root.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
@@ -38,6 +39,7 @@ import { projectReducer } from './store/palladium.reducer';
 import { PalladiumEffects } from './store/palladium.effects';
 import { PalladiumApiService } from './services/palladium-api.service';
 import { ProjectNewComponent } from './projects/project-new-dialog/project-new-dialog.component';
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,7 @@ import { ProjectNewComponent } from './projects/project-new-dialog/project-new-d
     MatCardModule,
     MatMenuModule,
     MatIconModule,
+    MatDialogModule,
     MatButtonModule,
     LayoutModule,
     MatToolbarModule,
@@ -82,7 +85,8 @@ import { ProjectNewComponent } from './projects/project-new-dialog/project-new-d
     StoreModule.forRoot({projects: projectReducer}, {}),
     EffectsModule.forRoot([PalladiumEffects]),
   ],
-  providers: [httpInterceptorManager, ThemeService, PalladiumApiService],
+  providers: [httpInterceptorManager, ThemeService, PalladiumApiService,
+     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}],
   bootstrap: [RootComponent]
 })
 export class AppModule { }

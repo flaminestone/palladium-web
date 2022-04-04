@@ -8,5 +8,6 @@ export const REMOVE_PROJECT = "[PROJECT] Remove";
 export namespace ProjectSelectors {
     export const state = createFeatureSelector<State>('projects')
 
-    export const get_projects = createSelector(state, (state) => state.projects)
+    export const getProjects = createSelector(state, (state) => state.projects)
+    export const getNames = createSelector(state, (state) => state.projects.map(project => project.name))
 }

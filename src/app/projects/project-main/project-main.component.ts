@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ProjectNewComponent } from '../project-new-dialog/project-new-dialog.component';
 
 @Component({
   selector: 'app-project-main',
@@ -7,6 +9,11 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
+  createProject(): void {
+    this.dialog.open(ProjectNewComponent, {
+      data: {name: ''},
+    });
+  }
 }

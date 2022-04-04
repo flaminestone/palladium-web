@@ -1,5 +1,8 @@
 <header [title]="'Projects'"></header>
 <project-list></project-list>
-<button mat-fab color="accent" aria-label="Create new project" class="create-new-project">
+<button mat-fab color="accent"
+ aria-label="Create new project"
+ class="create-new-project"
+ (click)="createProject()">
     <mat-icon>add</mat-icon>
 </button>

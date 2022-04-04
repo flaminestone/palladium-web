@@ -1,3 +1,7 @@
+export interface NewProjectInterface {
+    // interface for creating new project
+    name: string,
+}
 export interface ProjectInterface {
     id: number,
     name: string,
