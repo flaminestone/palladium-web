@@ -40,7 +40,6 @@ export class ProjectNewComponent {
     return (control: AbstractControl)=> {
       return projectNames$.pipe(first(),
         map(projectNames => {
-          console.log(projectNames)
         const nameIsExists = projectNames.includes(control.value)
         return nameIsExists? {projectNameValidator: nameIsExists}: null
       }))

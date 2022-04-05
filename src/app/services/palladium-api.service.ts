@@ -15,7 +15,7 @@ import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 // import { Statistic } from '../app/models/statistic';
 // import { NGXLogger } from 'ngx-logger';
 // import { Invite } from "../app/models/invite";
-import { map, switchMap, take } from 'rxjs/operators';
+import { delay, map, switchMap, take } from 'rxjs/operators';
 import { HttpBackend, HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { NewProjectInterface, Project } from '../models/project.model';
@@ -30,14 +30,14 @@ export class PalladiumApiService {
   }
 
   getProjects(): Observable<Project[]> {
-    return this.http.post<{"products": Project[]}>('/api/products', null).pipe(map(data => {
+    return this.http.post<{"products": Project[]}>('/api/products', null).pipe(delay(1000), map(data => {
       return data['products']
     }))
   }
 
   newProject(newProjectData: NewProjectInterface): Observable<Project> {
     const body = { product_data: newProjectData }
-      return this.http.post<{"product": Project}>('/api/product_new', body).pipe(map(data => {
+      return this.http.post<{"product": Project}>('/api/product_new', body).pipe(delay(1000), map(data => {
         return data['product']
       }))
   }
