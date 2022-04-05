@@ -6,6 +6,7 @@ import { NewProjectInterface, ProjectInterface } from '../models/project.model';
 import { PalladiumApiService } from '../services/palladium-api.service';
 import { ProjectActions } from './palladium.actions';
 import { CommonActions } from './common/common.actions';
+import { MainNotificationService } from '../services/main-notification.service';
  
 @Injectable()
 export class PalladiumEffects {
@@ -31,6 +32,7 @@ export class PalladiumEffects {
       return this.palladiumApi.newProject(newProject).pipe(
         map((project: ProjectInterface) => {
           this.store$.dispatch(CommonActions.mainProgressBarInvisible())
+          this.notificationService.message('Project ' + project.name + ' created!')
           return ProjectActions.newProjectSuccess(project)
         })
       )
@@ -42,5 +44,6 @@ export class PalladiumEffects {
     private store$: Store,
     private actions$: Actions,
     private palladiumApi: PalladiumApiService,
+    private notificationService: MainNotificationService
   ) {}
 }

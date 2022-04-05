@@ -25,7 +25,6 @@ export const projectReducer = createReducer(
     on(ProjectActions.newProjectSuccess, (state, projectData) => ({
         ...state,
         projects: [...state.projects, new Project(projectData)],
-        newProjectLoading: false
     }))
 );
 

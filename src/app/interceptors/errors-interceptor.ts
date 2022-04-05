@@ -17,14 +17,14 @@ export class ErrorsInterceptor implements HttpInterceptor {
                     if (error.error instanceof ErrorEvent) {
                         console.log('this is client side error');
                         errorMsg = `Error: ${error.error.message}`;
-                        this.notificationService.message({ errors: error.message });
+                        this.notificationService.messageError({ errors: error.message });
                     }
                     else {
                         if (error.status == 401) {
-                            this.notificationService.message(error.error)
+                            this.notificationService.messageError(error.error)
                         }
                         else {
-                            this.notificationService.message({ errors: error.message });
+                            this.notificationService.messageError({ errors: error.message });
                         }
                     }
                     return throwError(errorMsg);
