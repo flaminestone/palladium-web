@@ -34,6 +34,7 @@ export class ProjectNewComponent {
 
   save() {
     this.store$.dispatch(ProjectActions.newProject(this.projectForm.value))
+    this.dialogRef.close()
   }
 
   projectNameValidator(projectNames$: Observable<string[]>): AsyncValidatorFn {

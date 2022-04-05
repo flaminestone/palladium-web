@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { AuthenticationService } from '../services/authentication.service';
 import { CurrentUserService } from '../services/current-user.service';
 import { ThemeService } from '../services/theme.service';
-import { CommonSelectors } from '../store/palladium.selectors';
+import { CommonSelectors } from '../store/common/common.selectors';
 
 @Component({
   selector: 'app-toolbar',

@@ -4,7 +4,8 @@ import { Store } from '@ngrx/store';
 import { map, mergeMap } from 'rxjs/operators';
 import { NewProjectInterface, ProjectInterface } from '../models/project.model';
 import { PalladiumApiService } from '../services/palladium-api.service';
-import { CommonActions, ProjectActions } from './palladium.actions';
+import { ProjectActions } from './palladium.actions';
+import { CommonActions } from './common/common.actions';
  
 @Injectable()
 export class PalladiumEffects {

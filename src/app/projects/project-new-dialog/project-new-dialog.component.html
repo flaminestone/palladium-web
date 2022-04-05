@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>New project</h1>
 <div mat-dialog-content>
   <p>What's name of new project?</p>
-  <form [formGroup]="projectForm">
+  <form [formGroup]="projectForm" (ngSubmit)="projectForm.valid && projectForm.dirty && save()">
     <mat-form-field appearance="fill">
       <mat-label>New project name</mat-label>
       <input matInput formControlName="name"
@@ -14,5 +14,6 @@
   </form>
 </div>
 <div mat-dialog-actions align="end">
-  <button mat-button (click)="save()" [disabled]="!projectForm.valid">Save</button>
+  <button mat-button (click)="save()"
+   [disabled]="!projectForm.valid" type="submit">Save</button>
 </div>
