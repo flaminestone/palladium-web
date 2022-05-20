@@ -4,7 +4,6 @@ import { DashboardComponent } from './projects/project-main/project-main.compone
 import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { ProjectListComponent } from './projects/project-list/project-list.component';
-import { RootComponent } from './root/root.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },

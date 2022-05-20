@@ -31,7 +31,6 @@ export class AuthenticationService {
     return this.http.post<TokenRequestInterface>('/public/login', requestData).pipe(map((response) => {
       localStorage.setItem('auth_data', JSON.stringify({ email, token: response?.token }));
       this.router.navigate(['/']);
-      this.currentUserService.setUser(new User(email, response.token))
       
       this.authorisedStatus.next(this.getAuthorisedStatus());
       return response;
@@ -48,7 +47,7 @@ export class AuthenticationService {
 
   initUserByLocalStorageData(data: string): void {
     const auth_data = JSON.parse(data)
-    this.currentUserService.setUser(new User(auth_data.email, auth_data.token))
+    // this.currentUserService.setUser(new User(auth_data.email, auth_data.token))
   }
 }
 

@@ -35,7 +35,7 @@ import { ProjectComponent } from './projects/project/project.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { projectReducer } from './store/palladium.reducer';
+import { palladiumReducer } from './store/palladium.reducer';
 import { commonReducer } from './store/common/common.reducer';
 import { PalladiumEffects } from './store/palladium.effects';
 import { PalladiumApiService } from './services/palladium-api.service';
@@ -82,10 +82,10 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/materi
     MatProgressBarModule,
     HttpClientModule,
     MatSnackBarModule,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    StoreModule.forRoot({projects: projectReducer, 
+    StoreModule.forRoot({palladium: palladiumReducer,
                          common: commonReducer}, {}),
     EffectsModule.forRoot([PalladiumEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [httpInterceptorManager, ThemeService, PalladiumApiService,
      {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}],

@@ -13,7 +13,8 @@ export class ErrorsInterceptor implements HttpInterceptor {
         return next.handle(req)
             .pipe(
                 catchError((error: HttpErrorResponse) => {
-                    let errorMsg = '';
+                    let errorMsg = error.message;
+                    console.log(error)
                     if (error.error instanceof ErrorEvent) {
                         console.log('this is client side error');
                         errorMsg = `Error: ${error.error.message}`;
@@ -29,6 +30,5 @@ export class ErrorsInterceptor implements HttpInterceptor {
                     }
                     return throwError(errorMsg);
                 }))
-
     }
 }

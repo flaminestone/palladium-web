@@ -1,29 +1,26 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AuthenticationService } from '../services/authentication.service';
-import { CurrentUserService } from '../services/current-user.service';
+import { map } from 'rxjs/operators';
+import { User } from '../models/user.model';
+import { UserSelectors } from '../store/palladium.selectors';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
   constructor(private router: Router,
-    private currentUserService: CurrentUserService,
-    private authenticationService: AuthenticationService) { }
+              private store$: Store) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const auth_data = localStorage.getItem('auth_data')
-    if (auth_data) {
-      if (!this.currentUserService.getUser()) {
-        this.authenticationService.initUserByLocalStorageData(auth_data)
-      }
-      return true;
-    }
-    // not logged in so redirect to login page with the return url
-    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-    return false;
+    state: RouterStateSnapshot): Observable<boolean> {
+      return this.store$.select(UserSelectors.currentUser).pipe(map((user: (User | undefined)) => {
+        if(!!!user) {
+          this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+        }
+        return !!user
+      }))
   }
 }

@@ -1,9 +1,7 @@
-import { ThemePalette } from "@angular/material/core";
-import { ProgressBarMode } from "@angular/material/progress-bar";
 import { createReducer, on } from "@ngrx/store";
 import { Project } from "../models/project.model";
 import { User } from "../models/user.model";
-import { ProjectActions } from "./palladium.actions";
+import { ProjectActions, UserActions } from "./palladium.actions";
 
 export interface State {
     projects: Project[],
@@ -11,12 +9,19 @@ export interface State {
 }
 
 const initialPalladiumState: State = {
-    projects: [],
+    projects: []
 }
 
 
-export const projectReducer = createReducer(
+export const palladiumReducer = createReducer(
     initialPalladiumState,
+    on(UserActions.loginSuccess, (state, loginData) => {
+        return {...state,
+                 user: new User({email: loginData.email, token: loginData.token})}
+    }),
+    on(UserActions.logoutStore, (state) => {
+        return {...state, user: undefined}
+    }),
     on(ProjectActions.getProjectsSuccess, (state, {data}) => ({
         ...state,
         projects: data.map(projectData => new Project(projectData))
@@ -27,5 +32,4 @@ export const projectReducer = createReducer(
         projects: [...state.projects, new Project(projectData)],
     }))
 );
-
   

@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { finalize } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { finalize, map } from 'rxjs/operators';
+import { User } from '../models/user.model';
 import { AuthenticationService } from '../services/authentication.service';
 import { MainNotificationService } from '../services/main-notification.service';
+import { UserActions } from '../store/palladium.actions';
+import { UserSelectors } from '../store/palladium.selectors';
 
 @Component({
   selector: 'app-login',
@@ -21,10 +26,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public notificationService: MainNotificationService,
-    private authService: AuthenticationService) { }
+    private store$: Store) { }
 
   ngOnInit(): void {
-    this.setCredentianIfExist();
+    // this.setCredentianIfExist();
   }
 
   setCredentianIfExist(): void {
@@ -42,9 +47,12 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     if (this.form.valid && this.allowLogin) {
       this.allowLogin = false;
-      this.authService.login(this.form.controls.username.value,
-                             this.form.controls.password.value).
-                             pipe(finalize(() => this.allowLogin = true)).subscribe();                    
+      const userLoginData = {
+        email: this.form.controls.username.value,
+        password: this.form.controls.password.value
+      }
+      this.store$.dispatch(UserActions.login(userLoginData))
+      this.allowLogin = true;
     }
   }
 }

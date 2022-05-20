@@ -11,22 +11,34 @@ import { Router } from '@angular/router';
 // import { Result } from '../app/models/result';
 // import { History } from '../app/models/history_object';
 // import { Status } from '../app/models/status';
-import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, Observable, of, ReplaySubject, timer } from 'rxjs';
 // import { Statistic } from '../app/models/statistic';
 // import { NGXLogger } from 'ngx-logger';
 // import { Invite } from "../app/models/invite";
-import { delay, map, switchMap, take } from 'rxjs/operators';
+import { catchError, delay, map, switchMap, take } from 'rxjs/operators';
 import { HttpBackend, HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { NewProjectInterface, Project } from '../models/project.model';
+import { UserCredentials, UserLoginData } from '../models/user.model';
 
 
 @Injectable()
 export class PalladiumApiService {
-  private httpWithoutInterceptor: HttpClient;
 
-  constructor(private router: Router, private http: HttpClient, private httpBackend: HttpBackend) {
-    this.httpWithoutInterceptor = new HttpClient(httpBackend);
+  constructor(private router: Router, private http: HttpClient) {}
+
+  login(userData: UserLoginData): Observable<string> {
+    return this.http.post<{token: string}>('/public/login',
+                                           {'user_data': userData}).pipe(
+                                           map((response) => {
+                                            console.log(response)
+
+      return response.token;  
+    }),
+    catchError((error: any) => {
+      console.log(error)
+      return of(error)
+    }));
   }
 
   getProjects(): Observable<Project[]> {
@@ -40,10 +52,6 @@ export class PalladiumApiService {
       return this.http.post<{"product": Project}>('/api/product_new', body).pipe(delay(1000), map(data => {
         return data['product']
       }))
-  }
-
-  get_test() {
-    return this.httpWithoutInterceptor.get('https://my-json-server.typicode.com/typicode/demo/posts')
   }
 
   // products$: ReplaySubject<Product[]> = new ReplaySubject(1);

@@ -6,9 +6,9 @@
     <button mat-icon-button (click)="themeService.setDarkTheme(!themeService.isDarkTheme.value)">
       <mat-icon>{{(themeService.isDarkTheme | async)?"dark_mode":"light_mode"}}</mat-icon>
     </button>
-    <button mat-button [matMenuTriggerFor]="menu" *ngIf="authenticationService.authorisedStatus | async">
+    <button mat-button [matMenuTriggerFor]="menu" *ngIf="(user$ | async)">
       <mat-icon>person</mat-icon>
-      {{currentUserService.getUser()?.username}}
+      {{(user$ | async)?.email}}
     </button>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -20,5 +20,5 @@
 </mat-progress-bar>
 
 <mat-menu #menu="matMenu">
-  <button mat-menu-item (click)="authenticationService.logout()">Logout</button>
+  <button mat-menu-item (click)="logout()">Logout</button>
 </mat-menu>

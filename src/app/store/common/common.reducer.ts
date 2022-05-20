@@ -30,14 +30,6 @@ export const commonReducer = createReducer(
         mainProgressBar: {...state.mainProgressBar, visible: true}
     }))
 );
-
-export interface MainProgressBarStateInterface {
-    visible: boolean;
-    color: ThemePalette;
-    mode: ProgressBarMode;
-    value: number;
-    bufferValue: number;
-  }
   
 export interface MainProgressBarStateInterface {
     visible: boolean;
