@@ -25,7 +25,9 @@ export class PalladiumEffects {
   );
 
   mainLoaderHide$ = createEffect(() => this.actions$.pipe(
-    ofType(UserActions.loginSuccess, ProjectActions.getProjectsSuccess),
+    ofType(UserActions.loginSuccess,
+       ProjectActions.getProjectsSuccess,
+       ProjectActions.newProjectSuccess),
     map(_ => CommonActions.mainProgressBarInvisible()))
   );
 
